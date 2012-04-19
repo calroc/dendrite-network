@@ -1,0 +1,7 @@
+export U2T_PORT=11213
+export T2U_PORT=11214
+export ENG_PORT=11215
+
+memcached -d -p $U2T_PORT -U $U2T_PORT -M -P ~/u2t.pid
+memcached -d -p $T2U_PORT -U $T2U_PORT -M -P ~/t2u.pid
+memcached -d -p $ENG_PORT -U $ENG_PORT -M -P ~/eng.pid

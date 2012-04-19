@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="static/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script type="text/javascript" src="static/js/underscore.js"></script>
+    <link href="static/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+    <link href="static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+	<title>Dendrite Network</title>
+    <script type="text/javascript">
+$(function() {
+    $("input:submit").button();
+});
+    </script>
+</head>
+<body>
+<div class="container">
+<div class="row"><div class="twelve columns" >&nbsp;</div></div>
+<div class="row"><div class="twelve columns" ><div class="panel">
+    <h1>Dendrite Network</h1>
+</div></div></div>
+
+<div class="row"><div class="twelve columns" ><div id="slider" class="panel">
+    <h2>Register an{% if tag %}other{% endif %} URL</h2>
+    <form class="nice" method="POST" action="{% url register %}">
+        {% csrf_token %}
+        <center>
+        <input id="urly" type="text" name="urly" maxlength="100" size="100" placeholder="http://" />
+        </center>
+        <br/>
+        <input type="submit" value="Give me a tag for this URL"/>
+    </form>
+</div></div></div>
+
+{% if tag %}
+<div class="row"><div class="twelve columns" ><div class="panel">
+    <h2>The Tag for your URL</h2>
+    <div class="taggy">{{ tag }}</div>
+</div></div></div>
+{% endif %}
+
+</div>
+</body>
+</html>

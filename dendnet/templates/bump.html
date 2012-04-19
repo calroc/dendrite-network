@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script type="text/javascript" src="/static/js/underscore.js"></script>
+    <script type="text/javascript" src="/static/foundation-2.2/javascripts/foundation.js"></script>
+    <link href="/static/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+    <link href="/static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/foundation/reveal.css">
+    <link href="/static/css/style.css" rel="stylesheet">
+	<title>Dendrite Network</title>
+    <script type="text/javascript">
+
+function engage_action () {
+    $.get("/engage/{{ you }}/{{ it }}", function(data) {
+        if (data) {
+            window.location.href = "{{ iframe_url }}";
+        }
+    });
+}
+
+function forward_action () {
+    $('#forward_dialog').reveal();
+}
+
+function size_iframe () {
+    var window_height = $(window).height();
+    var controls_height = $(".container").height();
+    var iframe_height = window_height - controls_height - 4;
+    $("iframe").height(iframe_height);
+}
+
+$(function() {
+    $("button#Engage")
+      .button({icons:{secondary:'ui-icon-arrow-4-diag'},})
+      .click(engage_action);
+    $("button#Forward")
+      .button({icons:{secondary:'ui-icon-check'},})
+      .click(forward_action);
+    $("button#Reject").button({icons:{secondary:'ui-icon-close'},});
+
+    $("button#forward_ok")
+      .button({icons:{secondary:'ui-icon-check'},})
+      .click(function() {$('#forward_dialog').trigger('reveal:close');});;
+
+    $("button#forward_no")
+      .button({icons:{secondary:'ui-icon-close'},})
+      .click(function() {$('#forward_dialog').trigger('reveal:close');});;
+
+    size_iframe();
+    $(window).resize(size_iframe);
+});
+    </script>
+</head>
+<body>
+<div class="container">
+<div class="row"><div class="twelve columns" >&nbsp;</div></div>
+<div class="row"><div class="twelve columns" ><div class="panel">
+    <button id="Engage">Engage</button>
+    <button id="Forward">Forward</button>
+    <button id="Reject">Reject</button>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{{ from_url }}" title="{{ from_url }}">from</a>
+    <br/>&nbsp;
+</div></div></div>
+
+{% if tag %}
+<div class="row"><div class="twelve columns" ><div class="panel">
+    <h2>The Tag for your URL</h2>
+    <div class="taggy">{{ tag }}</div>
+</div></div></div>
+{% endif %}
+
+</div>
+<iframe src="{{ iframe_url }}" ></iframe>
+
+<div id="forward_dialog" class="reveal-modal">
+     <h1>Forward to...</h1>
+     <div>
+     <a href="http://dendritenetwork.com/bump/{{ you }}/{{ it }}/">
+     http://dendritenetwork.com/bump/{{ you }}/{{ it }}/&lt;contact&gt;
+     </a>
+     </div>
+     <a href="mailto:email@example.com?subject=SweetWords&body=Please send me a copy of your new program!">Email Me</a>
+     <div>
+       <button id="forward_ok">Do it</button>
+       <button id="forward_no">Cancel</button>
+     </div>
+     <a class="close-reveal-modal">&#215;</a>
+</div>
+
+</body>
+</html>

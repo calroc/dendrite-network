@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dendrite Network Model</title>
+    <script type="text/javascript" src="static/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="static/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.geom.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.layout.min.js"></script>
+    <script type="text/javascript" src="static/js/underscore.js"></script>
+    <link href="static/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+    <link href="static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
+    <script type="text/javascript">
+
+var NodeClass = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.contacts = [];
+    this.newbie = true;
+}
+
+var w = 978,
+    h = 755,
+    k = 4,
+    chance = 0.08,
+    nodes = [],
+    links = [],
+    colors = d3.scale.linear().domain([1, k]).range(
+        ["hsl(350, 50%, 50%)", "hsl(250, 100%, 50%)"]
+        ).interpolate(d3.interpolateHsl);
+;
+
+var root_node = new NodeClass(w/2, h/2);
+nodes.push(root_node);
+
+$(function() {
+
+var vis = d3.select(".hull").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h);
+/*
+vis.append("svg:rect")
+    .attr("width", w)
+    .attr("height", h);
+*/
+var force = d3.layout.force()
+    .nodes(nodes)
+    .links(links)
+    .linkDistance(7)
+    .size([w, h]);
+
+var cursor = vis.append("svg:circle")
+    .attr("r", 30)
+    .attr("transform", "translate(-100,-100)")
+    .attr("class", "cursor");
+
+force.on("tick", function() {
+  vis.selectAll("line.link")
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  vis.selectAll("circle.node")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+      .filter(function(d) { return ! d.newbie; })
+      .attr("fill", function(d) { return colors(d.contacts.length); });
+});
+
+vis.on("mousemove", function() {
+//  cursor.attr("transform", "translate(" + d3.svg.mouse(this) + ")");
+});
+
+function new_node() {
+  var node = new NodeClass(Math.random() * w, Math.random() * h),
+      shufd = _.shuffle(nodes);
+
+  // add links to any nearby nodes
+  for (var i = 0; i < shufd.length; i++) {
+    var target = shufd[i];
+//    console.log(target);
+    if (target.contacts.length < k) {
+      links.push({source: node, target: target});
+      target.contacts.push(node);
+      break;
+    }
+  }
+  nodes.push(node);
+  restart();
+}
+
+function new_nodesss() {
+    var n = Math.ceil(Math.log(nodes.length));
+    console.log(n);
+    if (n <= 0) { n = 1; };
+    for (;n>0;n--) {
+        new_node();
+    }
+}
+
+function new_node_2() {
+  var newnodes = [];
+  for (var i = 0; i < nodes.length; i++) {
+    var target = nodes[i];
+    var ratio = target.contacts.length / k; //(target.contacts.length == 0)
+    var n = 1 - ratio;
+    if (target.contacts.length < k && ((n * Math.random()) <= chance)) {
+      var node = new NodeClass(
+        target.x + (Math.random() - 0.5) * 10,
+        target.y + (Math.random() - 0.5) * 10
+      );
+      links.push({source: node, target: target});
+      target.contacts.push(node);
+      node.contacts.push(target);
+      newnodes.push(node);
+    }
+  }
+  _.each(newnodes, function(n){ nodes.push(n);});
+  restart();
+  return newnodes;
+}
+
+function runloop() {
+//    window.setTimeout(runloop, 1000);
+    var newnodes;
+    while (true) {
+        newnodes = new_node_2();
+        var count = newnodes.length;
+        if (count > 0) {
+            console.log(count);
+            break;
+        }
+    };
+
+}
+
+//runloop();
+//vis.on("mousedown", new_nodesss);
+vis.on("mousedown", runloop);
+
+
+restart();
+
+function restart() {
+
+  vis.selectAll("line.link")
+      .data(links)
+    .enter().insert("svg:line", "circle.node")
+      .attr("class", "link")
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  vis.selectAll("circle.node")
+      .data(nodes)
+    .enter().insert("svg:circle", "circle.cursor")
+      .attr("class", "node")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+      .attr("r", 5)
+      .attr("fill", "yellow")
+      .call(force.drag)
+    .transition()
+      .duration(150)
+      .attr("fill", function(d) { return colors(d.contacts.length); })
+      .each("end", function(d) {
+        d.newbie = false;
+      });
+
+  force.start();
+}
+
+});
+    </script>
+    <style type="text/css">
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #aaaaaa;
+}
+
+.hull {
+    border: solid 1px black;
+}
+
+rect {
+  fill: #fff;
+}
+
+.node {
+}
+
+.cursor {
+  fill: none;
+  stroke: brown;
+  pointer-events: none;
+}
+
+.link {
+  stroke: #222;
+}
+
+    </style>
+  </head>
+  <body>
+<div class="container">
+<div class="row"><div class="twelve columns" >
+<h1>Simple Model of a Dendrite Network</h1>
+This is a very simple dynamic model of how a Dendrite Network might kinda look.
+Click anywhere in the graphic below to add nodes to the network.
+
+<p>Nodes can have up to four connections and are color-coded by the number of connections that they have.
+<ul>
+<li>Nodes with just <span style="color:#bf4055">one contact</span> are <span style="color:#bf4055">Red</span>
+<li>Nodes with <span style="color:#d42ba5">two contacts</span> are <span style="color:#d42ba5">Pink</span>
+<li>Nodes with <span style="color:#af15ea">three contacts</span> are <span style="color:#af15ea">Lavender</span>
+<li>and nodes with <span style="color:#2b00ff">four contacts</span> (the most you can have in this model) are <span style="color:#2b00ff">Blue</span>
+</ul>
+    <div class="hull"></div>
+Nodes appear at random locations and are connected to randomly chosen existing nodes (that have less than four contacts already.)
+This is just a sort of toy model, it's meant to illustrate the shape and growth of the Dendrite Network but it's not a complete representation, so don't draw too many conclusions from this, just have fun with it.
+(If it runs slowly, try visiting this page using Google's Chrome browser. At this writing it has a very good animation engine and can usually run large nets well.)
+
+<p>I made this using the <a href="http://mbostock.github.com/d3/">d3</a> data visualization package's
+<a href="http://bl.ocks.org/929623">Force-Directed Layout (Dynamic) example</a>
+and modifying it a little. See also <a href="https://github.com/mbostock/d3/wiki">this page of awesome examples</a>.
+</div></div></div>
+  </body>
+</html>
