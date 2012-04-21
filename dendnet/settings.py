@@ -1,4 +1,3 @@
-# Django settings for myproject project.
 from os.path import dirname, join
 
 PROJECT_ROOT = dirname(__file__)
@@ -7,7 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Simon Forman', 'info@dendritenetwork.com'),
+    ('Simon Forman', 'forman.simon@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -104,10 +103,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'myproject.urls'
+ROOT_URLCONF = 'dendnet.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'myproject.wsgi.application'
+WSGI_APPLICATION = 'dendnet.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -142,7 +141,7 @@ LOGGING = {
     },
     'filters': {
         'special': {
-            '()': 'myproject.logstuff.NoteFilter',
+            '()': 'dendnet.logstuff.NoteFilter',
         },
     },
     'handlers': {
@@ -157,7 +156,7 @@ LOGGING = {
             'class':'logging.FileHandler',
             'formatter': 'mon',
             'filters': ['special'],
-            'filename': '/home/calroc/dendritenetwork.log',
+            'filename': '/home/sforman/Desktop/dendritenetwork.log', #'/home/calroc/dendritenetwork.log',
         },
     },
     'loggers': {

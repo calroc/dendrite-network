@@ -7,23 +7,23 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    url(r'^$', 'myproject.views.home', name='home'),
-    url(r'^describe/?$', 'myproject.views.describe', name='describe'),
-    url(r'^d3demo/?$', 'myproject.views.d3demo', name='d3demo'),
-    url(r'^register/?$', 'myproject.views.register', name='register'),
+    url(r'^$', 'dendnet.views.home', name='home'),
+    url(r'^describe/?$', 'dendnet.views.describe', name='describe'),
+    url(r'^d3demo/?$', 'dendnet.views.d3demo', name='d3demo'),
+    url(r'^register/?$', 'dendnet.views.register', name='register'),
     url(
         r'^bump'
         r'/(?P<me>[a-zA-Z0-9]{32})'
         r'/(?P<it>[a-zA-Z0-9]{32})'
         r'/(?P<you>[a-zA-Z0-9]{32})$',
-        'myproject.views.bump',
+        'dendnet.views.bump',
         name='bump'
         ),
     url(
         r'^engage'
         r'/(?P<me>[a-zA-Z0-9]{32})'
         r'/(?P<it>[a-zA-Z0-9]{32})',
-        'myproject.views.engage',
+        'dendnet.views.engage',
         name='engage'
         ),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
