@@ -1,6 +1,7 @@
 from os.path import dirname, join
 
 PROJECT_ROOT = dirname(__file__)
+PRODUCTION = 'calroc' in PROJECT_ROOT
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -128,7 +129,7 @@ INSTALLED_APPS = (
 
 LOG_FILE = (
     '/home/calroc/dendritenetwork.log'
-    if 'calroc' in PROJECT_ROOT else
+    if PRODUCTION else
     '/home/sforman/Desktop/dendritenetwork.log'
     )
 
