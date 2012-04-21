@@ -35,23 +35,24 @@ def register(request):
 
 
 def bump(request, me, it, you):
+    data = dict(
+        from_url=tag2url(me),
+        iframe_url=tag2url(it),
+        me=me,
+        it=it,
+        you=you,
+        )
     log.info('bump %s %s %s', me, it, you)
     return render_to_response(
         'bump.html',
-        dict(
-            from_url=tag2url(me),
-            iframe_url=tag2url(it),
-            me=me,
-            it=it,
-            you=you,
-            ),
+        data,
         context_instance=RequestContext(request),
         )
 
 
 def engage(request, me, it):
-    log.info('engage %s %s', me, it)
     note_engage(me, it)
+    log.info('engage %s %s', me, it)
     return HttpResponse('true', mimetype="application/json")
 
 

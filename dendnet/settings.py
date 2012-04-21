@@ -128,7 +128,7 @@ INSTALLED_APPS = (
 )
 
 LOG_FILE = (
-    '/home/calroc/dendritenetwork.log'
+    '/home/calroc/webapps/dendrite_static_site/dn-logs/dendritenetwork.log'
     if PRODUCTION else
     '/home/sforman/Desktop/dendritenetwork.log'
     )
