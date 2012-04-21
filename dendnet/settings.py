@@ -126,6 +126,12 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
+LOG_FILE = (
+    '/home/calroc/dendritenetwork.log'
+    if 'calroc' in PROJECT_ROOT else
+    '/home/sforman/Desktop/dendritenetwork.log'
+    )
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -156,7 +162,7 @@ LOGGING = {
             'class':'logging.FileHandler',
             'formatter': 'mon',
             'filters': ['special'],
-            'filename': '/home/sforman/Desktop/dendritenetwork.log', #'/home/calroc/dendritenetwork.log',
+            'filename': LOG_FILE,
         },
     },
     'loggers': {
