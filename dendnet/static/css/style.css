@@ -47,6 +47,16 @@ div.third {
     margin-bottom: 1em;
 }
 
+#dn_logo {
+    background-image: url('/static/DN.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-top: -20px;
+    margin-left: -10px;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
 iframe {
     width: 100%;
     height: 760px;
