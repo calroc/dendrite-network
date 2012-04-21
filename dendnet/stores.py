@@ -1,3 +1,4 @@
+from os.path import exists
 from hashlib import md5
 from time import time
 from dendnet.memcache import Client
@@ -5,9 +6,10 @@ from dendnet.memcache import Client
 
 gen_tag = lambda url: md5(url).hexdigest()
 
-try:
+
+if exists('/home/calroc/memcached.sock'):
     U2T = T2U = ENG = Client(['unix:/home/calroc/memcached.sock'], debug=True)
-except:
+else:
     U2T = Client(['127.0.0.1:11213'], debug=True)
     T2U = Client(['127.0.0.1:11214'], debug=True)
     ENG = Client(['127.0.0.1:11215'], debug=True)
