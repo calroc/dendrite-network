@@ -8,21 +8,27 @@
     <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/static/js/underscore.js"></script>
     <script type="text/javascript" src="/static/foundation-2.2/javascripts/foundation.js"></script>
-    <script type="text/javascript" src="/static/js/controls.js"></script>
     <link href="/static/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet">
     <link href="/static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/foundation-2.2/stylesheets/reveal.css">
     <link href="/static/css/style.css" rel="stylesheet">
 	<title>Dendrite Network</title>
     <script type="text/javascript">
+var engage_url = "/engage/{{ you }}/{{ it }}";
+var iframe_url = "{{ iframe_url }}"
+    </script>
+    <script type="text/javascript" src="/static/js/controls.js"></script>
+    <script type="text/javascript">
 $(function() {
   setup_button("button#Engage", 'ui-icon-arrow-4-diag', engage_action);
   setup_button("button#Forward", 'ui-icon-check', forward_action);
   setup_button("button#Reject", 'ui-icon-close', reject_action);
+  setup_button("button#hurm", 'ui-icon-help', (function(){$('#explain_dialog').reveal();}));
   setup_button("button#forward_ok", 'ui-icon-check', close_forward_dialog);
   setup_button("button#forward_no", 'ui-icon-close', close_forward_dialog);
   setup_button("button#reject_ok", 'ui-icon-check', close_reject_dialog);
   setup_button("button#reject_no", 'ui-icon-close', close_reject_dialog);
+  setup_button("button#explain_no", 'ui-icon-close', close_explain_dialog);
   size_iframe();
   $(window).resize(size_iframe);
 });
@@ -38,6 +44,10 @@ $(function() {
     <button id="Reject">Reject</button>
     &nbsp;&nbsp;&nbsp;
     <a href="{{ from_url }}" title="{{ from_url }}">from</a>
+    &nbsp;&nbsp;&nbsp;
+    <div style="float:right">
+    <button id="hurm">Explain</button>
+    </div>
     <br/>&nbsp;
   </div>
 </div></div></div>
@@ -55,14 +65,31 @@ $(function() {
 <div id="forward_dialog" class="reveal-modal">
   <h1>Forward to...</h1>
   <div>
+    <p>This is where you select contacts and forward to them.</p>
+    <p>I haven't exactly figured out just how to do this. I'd like
+    to provide a list of contacts with various ways to send them
+    your URLs (i.e. via Twitter, email, SMS, whatever.)</p>
+    <p>For now, here's the first part of the URL with your tag in
+    the {you} position. To use it:</p>
+    <ol>
+    <li>Cut and paste the URL into a text editor.
+    <li>Add a contact's tag to the end of the URL.
+    <li>Send it to them (via email or Twitter or however.)
+    </ol>
+  </div>
+  <div class="taggy_like">
     <a href="http://dendritenetwork.com/bump/{{ you }}/{{ it }}/">
     http://dendritenetwork.com/bump/{{ you }}/{{ it }}/&lt;contact&gt;
     </a>
   </div>
-  <a href="mailto:email@example.com?subject=SweetWords&body=Please send me a copy of your new program!">Email Me</a>
+  <div>
+    <p>When your contact browses to the URL they'll see a page like this one and a "bump"
+    will be recorded in the DN logs.</p>
+  </div>
   <div>
     <button id="forward_ok">Do it</button>
     <button id="forward_no">Cancel</button>
+    <span style="font-size:smaller">(Currently the "Do it" button does nothing.)</span>
   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>
@@ -79,12 +106,31 @@ $(function() {
       <input type="checkbox" id="id_a" name="a"><label for="id_a">The contact who sent this to you.</label>
       <br/>
       <input type="checkbox" id="id_b" name="b"><label for="id_b">The site owner</label>
-    <form>
+    </form>
   </div>
   <div>
     <button id="reject_ok">Send Rejection</button>
     <button id="reject_no">Cancel</button>
     <span style="font-size:smaller">(Currently the "Send" button does nothing.)</span>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="explain_dialog" class="reveal-modal">
+  <h1 style="font-size:48px">Dendrite Network</h1>
+  <div>
+    <p>You're looking at a page being display via the <a href="http://dendritenetwork.com/">Dendrite Network</a>,
+    an experimental information propagation system.</p>
+
+    <p>Whoever sent you the URL that brought you here should have expained a little about how it works.
+    There is more information available at the <a href="http://dendritenetwork.com/">main site</a> and at
+    <a href="http://firequery.blogspot.com/">my blog "Burning Questions"</a>.</p>
+
+    <p>You can also ask questions at the
+    <a href="http://groups.google.com/group/dendrite-network">Dendrite Network Google Group</a></p>
+    
+  </div>
+    <button id="explain_no">Close</button>
   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>

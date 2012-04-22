@@ -47,6 +47,13 @@ div.third {
     margin-bottom: 1em;
 }
 
+.taggy_like {
+    border: 1px solid orange;
+    background-color: #ddffdd;
+    padding: 1.5em;
+    margin-bottom: 1em;
+}
+
 #dn_logo {
     background-image: url('/static/DN.png');
     background-repeat: no-repeat;

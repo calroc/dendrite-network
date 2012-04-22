@@ -1,8 +1,8 @@
 
 function engage_action () {
-    $.get("/engage/{{ you }}/{{ it }}", function(data) {
+    $.get(engage_url, function(data) {
         if (data) {
-            window.location.href = "{{ iframe_url }}";
+            window.location.href = iframe_url;
         }
     });
 }
@@ -34,7 +34,10 @@ function close_forward_dialog() {
 
 function close_reject_dialog() {
   $('#reject_dialog').trigger('reveal:close');
-  return false; // because there's a FORM element in the dialog with the buttons I think.
+}
+
+function close_explain_dialog() {
+  $('#explain_dialog').trigger('reveal:close');
 }
 
 
