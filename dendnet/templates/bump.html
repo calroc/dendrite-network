@@ -18,9 +18,11 @@
 $(function() {
   setup_button("button#Engage", 'ui-icon-arrow-4-diag', engage_action);
   setup_button("button#Forward", 'ui-icon-check', forward_action);
-  setup_button("button#Reject", 'ui-icon-close', (function(){}));
+  setup_button("button#Reject", 'ui-icon-close', reject_action);
   setup_button("button#forward_ok", 'ui-icon-check', close_forward_dialog);
   setup_button("button#forward_no", 'ui-icon-close', close_forward_dialog);
+  setup_button("button#reject_ok", 'ui-icon-check', close_reject_dialog);
+  setup_button("button#reject_no", 'ui-icon-close', close_reject_dialog);
   size_iframe();
   $(window).resize(size_iframe);
 });
@@ -61,6 +63,28 @@ $(function() {
   <div>
     <button id="forward_ok">Do it</button>
     <button id="forward_no">Cancel</button>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="reject_dialog" class="reveal-modal">
+  <h1>Reject...</h1>
+  <div>
+    This is where you have a place to enter the reason you're rejecting this site.
+    You can send it to either the site owner, the person who sent you to this site, or both.
+  </div>
+  <div class="rejform">
+    <form class="nice">
+      <textarea name="reject_reason" cols="40" rows="4" id="id_reject_reason" placeholder="Enter your reason here if you want to..."></textarea>
+      <input type="checkbox" id="id_a" name="a"><label for="id_a">The contact who sent this to you.</label>
+      <br/>
+      <input type="checkbox" id="id_b" name="b"><label for="id_b">The site owner</label>
+    <form>
+  </div>
+  <div>
+    <button id="reject_ok">Send Rejection</button>
+    <button id="reject_no">Cancel</button>
+    <span style="font-size:smaller">(Currently the "Send" button does nothing.)</span>
   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>

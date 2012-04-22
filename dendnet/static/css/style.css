@@ -61,3 +61,11 @@ iframe {
     width: 100%;
     height: 760px;
 }
+
+.rejform {
+  padding: 1em;
+}
+
+label {
+  display: inline-block ! important;
+}

@@ -11,6 +11,10 @@ function forward_action () {
     $('#forward_dialog').reveal();
 }
 
+function reject_action () {
+    $('#reject_dialog').reveal();
+}
+
 function size_iframe () {
     var window_height = $(window).height();
     var controls_height = $(".container").height();
@@ -26,6 +30,11 @@ function setup_button(selector, icon, action) {
 
 function close_forward_dialog() {
   $('#forward_dialog').trigger('reveal:close');
+}
+
+function close_reject_dialog() {
+  $('#reject_dialog').trigger('reveal:close');
+  return false; // because there's a FORM element in the dialog with the buttons I think.
 }
 
 
