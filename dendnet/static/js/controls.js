@@ -40,4 +40,39 @@ function close_explain_dialog() {
   $('#explain_dialog').trigger('reveal:close');
 }
 
+function note_own_tag(tag) {
+  $.cookie("own_tag", tag, {
+    expires: 35,
+    path: '/',
+  })
+}
+
+function get_contacts() {
+  var contacts_cookie = $.cookie("contacts");
+  if (_.isNull(contacts_cookie)) {
+    return {};
+  }
+  var contacts = JSON.parse(contacts_cookie);
+  return contacts;
+}
+
+function set_contacts(contacts) {
+  var contacts_json = JSON.stringify(contacts);
+  $.cookie("contacts", contacts_json, {
+    expires: 35,
+    path: '/',
+  });
+}
+
+function set_contact(label, tag) {
+  var c = get_contacts();
+  c[label] = tag;
+  set_contacts(c);
+}
+
+function del_contact(label) {
+  var c = get_contacts();
+  delete c[label];
+  set_contacts(c);
+}
 

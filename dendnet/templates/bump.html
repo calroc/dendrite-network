@@ -3,6 +3,8 @@
 <head>
 	<meta name="language" content="en">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Dendrite Network</title>
+    <script type="text/javascript" src="/static/js/json2.js"></script>
     <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery-ui-1.8.18.custom.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
@@ -10,12 +12,12 @@
     <script type="text/javascript" src="/static/foundation-2.2/javascripts/foundation.js"></script>
     <link href="/static/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet">
     <link href="/static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/foundation-2.2/stylesheets/reveal.css">
+    <link href="/static/foundation-2.2/stylesheets/reveal.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
-	<title>Dendrite Network</title>
     <script type="text/javascript">
 var engage_url = "/engage/{{ you }}/{{ it }}";
 var iframe_url = "{{ iframe_url }}"
+var own_tag = "{{ you }}";
     </script>
     <script type="text/javascript" src="/static/js/controls.js"></script>
     <script type="text/javascript">
@@ -29,6 +31,7 @@ $(function() {
   setup_button("button#reject_ok", 'ui-icon-check', close_reject_dialog);
   setup_button("button#reject_no", 'ui-icon-close', close_reject_dialog);
   setup_button("button#explain_no", 'ui-icon-close', close_explain_dialog);
+  note_own_tag(own_tag);
   size_iframe();
   $(window).resize(size_iframe);
 });
