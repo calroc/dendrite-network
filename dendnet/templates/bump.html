@@ -16,7 +16,7 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <script type="text/javascript">
 var engage_url = "/engage/{{ you }}/{{ it }}";
-var bump_url = "/bump/{{ you }}/{{ it }}/";
+var bump_url = "http://dendritenetwork.com/bump/{{ you }}/{{ it }}/";
 var iframe_url = "{{ iframe_url }}"
 var own_tag = "{{ you }}";
     </script>
@@ -34,7 +34,9 @@ $(function() {
   setup_button("button#add_new_contact", 'ui-icon-plus', add_new_contact);
   note_own_tag(own_tag);
   size_iframe();
+  display_contacts();
   $(window).resize(size_iframe);
+  $(".taggy_like").find("a").click(function() { return false; });
 });
     </script>
 </head>
@@ -69,8 +71,8 @@ $(function() {
     <p>For now, here's the first part of the URL with your tag in
     the {you} position. To use it:</p>
     <ol>
-    <li>Cut and paste the URL into a text editor.
-    <li>Add a contact's tag to the end of the URL.
+    <li>Enter one or more contacts in the form.
+    <li>Click on a contact to add their tag to the end of the URL.
     <li>Send it to them (via email or Twitter or however.)
     </ol>
   </div>
@@ -79,12 +81,8 @@ $(function() {
     http://dendritenetwork.com/bump/{{ you }}/{{ it }}/&lt;contact&gt;
     </a>
   </div>
-  <div>
-    <p>When your contact browses to the URL they'll see a page like this one and a "bump"
-    will be recorded in the DN logs.</p>
-  </div>
-
   <div class="rejform">
+    <div id="contacts"></div>
     <form class="nice">
       <input
         type="text"
@@ -105,7 +103,10 @@ $(function() {
         <button id="add_new_contact">Add</button>
     </form>
   </div>
-
+  <div>
+    <p>When your contact browses to the URL they'll see a page like this one and a "bump"
+    will be recorded in the DN logs.</p>
+  </div>
 
   <div>
     <button id="forward_no">Close</button>

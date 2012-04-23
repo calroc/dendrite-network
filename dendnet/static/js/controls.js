@@ -80,7 +80,7 @@ function add_new_contact() {
   var new_contact_label = $("#id_new_contact_label");
   var label = new_contact_label.val();
   if (label == "") {
-    return;
+    return false; // prevent normal form submit.
   }
   var new_contact_tag = $("#id_new_contact_tag");
   var tag = new_contact_tag.val();
@@ -91,9 +91,29 @@ function add_new_contact() {
   }
   new_contact_label.val("");
   new_contact_tag.val("");
+  display_contacts();
   return false; // prevent normal form submit.
 }
 
 function display_contact(target, label, tag) {
-  $("").appendTo(target)
+  var d = $('<div class="contact_display"><a href="#">append tag of <span></span></a></div>');
+  d.find("span").text(label);
+  d.find("a").click(function() {
+    var burl = bump_url + tag;
+    var taggy = $("div.taggy_like").find("a");
+    taggy.text(burl);
+    taggy.attr("href", burl);
+    console.log(burl);
+    return false; // prevent navigation
+  });
+  d.appendTo(target);
+}
+
+function display_contacts() {
+  var contacts = get_contacts();
+  var target = $("#contacts");
+  target.empty();
+  _.each(contacts, function(tag, label) {
+    display_contact(target, label, tag);
+  })
 }
