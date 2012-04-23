@@ -16,6 +16,7 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <script type="text/javascript">
 var engage_url = "/engage/{{ you }}/{{ it }}";
+var bump_url = "/bump/{{ you }}/{{ it }}/";
 var iframe_url = "{{ iframe_url }}"
 var own_tag = "{{ you }}";
     </script>
@@ -26,11 +27,11 @@ $(function() {
   setup_button("button#Forward", 'ui-icon-check', forward_action);
   setup_button("button#Reject", 'ui-icon-close', reject_action);
   setup_button("button#hurm", 'ui-icon-help', (function(){$('#explain_dialog').reveal();}));
-  setup_button("button#forward_ok", 'ui-icon-check', close_forward_dialog);
   setup_button("button#forward_no", 'ui-icon-close', close_forward_dialog);
   setup_button("button#reject_ok", 'ui-icon-check', close_reject_dialog);
   setup_button("button#reject_no", 'ui-icon-close', close_reject_dialog);
   setup_button("button#explain_no", 'ui-icon-close', close_explain_dialog);
+  setup_button("button#add_new_contact", 'ui-icon-plus', add_new_contact);
   note_own_tag(own_tag);
   size_iframe();
   $(window).resize(size_iframe);
@@ -82,10 +83,32 @@ $(function() {
     <p>When your contact browses to the URL they'll see a page like this one and a "bump"
     will be recorded in the DN logs.</p>
   </div>
+
+  <div class="rejform">
+    <form class="nice">
+      <input
+        type="text"
+        id="id_new_contact_label"
+        name="new_contact_label"
+        maxlength="24"
+        size="10"
+        placeholder="label"
+        >
+      <input
+        type="text"
+        id="id_new_contact_tag"
+        name="new_contact_tag"
+        maxlength="32"
+        size="32"
+        placeholder="tag"
+        >
+        <button id="add_new_contact">Add</button>
+    </form>
+  </div>
+
+
   <div>
-    <button id="forward_ok">Do it</button>
-    <button id="forward_no">Cancel</button>
-    <span style="font-size:smaller">(Currently the "Do it" button does nothing.)</span>
+    <button id="forward_no">Close</button>
   </div>
   <a class="close-reveal-modal">&#215;</a>
 </div>

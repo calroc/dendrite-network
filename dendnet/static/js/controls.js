@@ -76,3 +76,24 @@ function del_contact(label) {
   set_contacts(c);
 }
 
+function add_new_contact() {
+  var new_contact_label = $("#id_new_contact_label");
+  var label = new_contact_label.val();
+  if (label == "") {
+    return;
+  }
+  var new_contact_tag = $("#id_new_contact_tag");
+  var tag = new_contact_tag.val();
+  if (tag == "") {
+    del_contact(label);
+  } else {
+    set_contact(label, tag);
+  }
+  new_contact_label.val("");
+  new_contact_tag.val("");
+  return false; // prevent normal form submit.
+}
+
+function display_contact(target, label, tag) {
+  $("").appendTo(target)
+}
