@@ -12,7 +12,11 @@
 	<title>Dendrite Network</title>
     <script type="text/javascript">
 $(function() {
-    $("input:submit").button();
+    $("input:submit").button().click(function(){
+      if ($("#urly").val() == "") {
+        return false;
+      }
+    });
 });
     </script>
 </head>
