@@ -1,8 +1,10 @@
 import logging
+from json import dumps
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from dendnet.stores import url2tag, tag2url
+from django.views.decorators.csrf import csrf_exempt
+from dendnet.stores import req2url2tag, tag2url
 from spreadlogger import SpreadHandler
 
 
@@ -27,16 +29,19 @@ def register(request):
             'register.html',
             context_instance=RequestContext(request),
             )
-
-    url = request.POST.get('urly')
-    assert url
-    tag = url2tag(url)
-    log.info('register %s %r', tag, url)
+    tag = req2url2tag(request, log)
     return render_to_response(
         'register.html',
         dict(tag=tag),
         context_instance=RequestContext(request),
         )
+
+
+@csrf_exempt
+def register_ajax(request):
+    assert request.method == 'POST'
+    tag = req2url2tag(request, log)
+    return HttpResponse(dumps(tag), mimetype="application/json")
 
 
 def bump(request, me, it, you):

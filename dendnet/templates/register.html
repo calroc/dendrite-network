@@ -12,10 +12,22 @@
 	<title>Dendrite Network</title>
     <script type="text/javascript">
 $(function() {
-    $("input:submit").button().click(function(){
-      if ($("#urly").val() == "") {
+    $("input:submit").button().click(function() {
+      var urly = $("#urly").val();
+      if (urly == "") {
         return false;
       }
+      $.post(
+        "{% url register_ajax %}",
+        {'urly': urly},
+        function (tag) { 
+          $("div.taggy").text(tag);
+          $("div#urly_display").text(urly);
+          $("#urly").val("");
+          $("div#tag_display").fadeIn();
+        }
+      );
+      return false;
     });
 });
     </script>
@@ -39,12 +51,11 @@ $(function() {
     </form>
 </div></div></div>
 
-{% if tag %}
-<div class="row"><div class="twelve columns" ><div class="panel">
+<div class="row"><div class="twelve columns" ><div id="tag_display" class="panel">
     <h2>The Tag for your URL</h2>
+    <div id="urly_display"></div>
     <div class="taggy">{{ tag }}</div>
 </div></div></div>
-{% endif %}
 
 </div>
 </body>

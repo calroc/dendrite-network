@@ -14,11 +14,12 @@ else:
     T2U = Client(['127.0.0.1:11214'], debug=True)
 
 
-def url2tag(url):
+def url2tag(url, log):
     url = str(url)
     tag = U2T.get(url)
     if not tag:
         tag = gen_tag(url)
+        log.info('register %s %r', tag, url)
         U2T.set(url, tag)
         T2U.set(tag, url)
     return tag
@@ -30,3 +31,9 @@ def tag2url(tag):
     if not url:
         raise KeyError(tag)
     return url
+
+
+def req2url2tag(request, log):
+    url = request.POST.get('urly')
+    assert url
+    return url2tag(url, log)

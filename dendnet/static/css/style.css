@@ -39,6 +39,15 @@ div.third {
     height: 258px;
 }
 
+
+div#tag_display {
+    display: none;
+}
+
+div#urly_display {
+    padding: 0.5em 2em;
+}
+
 .taggy {
     border: 1px solid orange;
     background-color: #ddffdd;
@@ -76,3 +85,4 @@ iframe {
 label {
   display: inline-block ! important;
 }
+

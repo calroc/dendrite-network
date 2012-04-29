@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^describe/?$', 'dendnet.views.describe', name='describe'),
     url(r'^d3demo/?$', 'dendnet.views.d3demo', name='d3demo'),
     url(r'^register/?$', 'dendnet.views.register', name='register'),
+    url(r'^xreg/?$', 'dendnet.views.register_ajax', name='register_ajax'),
     url(
         r'^bump'
         r'/(?P<me>[a-zA-Z0-9]{32})'
