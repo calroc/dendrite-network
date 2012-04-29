@@ -2,10 +2,15 @@ import logging
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from dendnet.stores import url2tag, tag2url, note_engage
+from dendnet.stores import url2tag, tag2url
+from spreadlogger import SpreadHandler
 
 
 log = logging.getLogger('mon')
+try:
+    log.addHandler(SpreadHandler())
+except:
+    log.exception("Spread Logging NON-active.")
 
 
 def home(request):
@@ -38,6 +43,7 @@ def bump(request, me, it, you):
     data = dict(
         from_url=tag2url(me),
         iframe_url=tag2url(it),
+        your_url=tag2url(you),
         me=me,
         it=it,
         you=you,
@@ -51,7 +57,6 @@ def bump(request, me, it, you):
 
 
 def engage(request, me, it):
-    note_engage(me, it)
     log.info('engage %s %s', me, it)
     return HttpResponse('true', mimetype="application/json")
 

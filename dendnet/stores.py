@@ -8,11 +8,10 @@ gen_tag = lambda url: md5(url).hexdigest()
 
 
 if exists('/home/calroc/memcached.sock'):
-    U2T = T2U = ENG = Client(['unix:/home/calroc/memcached.sock'], debug=True)
+    U2T = T2U = Client(['unix:/home/calroc/memcached.sock'], debug=True)
 else:
     U2T = Client(['127.0.0.1:11213'], debug=True)
     T2U = Client(['127.0.0.1:11214'], debug=True)
-    ENG = Client(['127.0.0.1:11215'], debug=True)
 
 
 def url2tag(url):
@@ -31,10 +30,3 @@ def tag2url(tag):
     if not url:
         raise KeyError(tag)
     return url
-
-
-def note_engage(me, it):
-    me = str(me)
-    it = str(it)
-    key = '%s/%s' % (me, it)
-    ENG.add(key, str(time())) # add() so only the first engage is recorded.
