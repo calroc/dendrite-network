@@ -5,14 +5,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from dendnet.stores import req2url2tag, tag2url
-from spreadlogger import SpreadHandler
 
 
 log = logging.getLogger('mon')
-try:
-    log.addHandler(SpreadHandler())
-except:
-    log.exception("Spread Logging NON-active.")
 
 
 def home(request):
@@ -64,8 +59,3 @@ def bump(request, me, it, you):
 def engage(request, me, it):
     log.info('engage %s %s', me, it)
     return HttpResponse('true', mimetype="application/json")
-
-
-
-
-
