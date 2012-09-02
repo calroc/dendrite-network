@@ -14,12 +14,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'calroc_dendrite',
-        'USER': 'calroc_dendrite',
-        'PASSWORD': 'zNv2CkNuiU',
-        'HOST': '', # Set to empty string for localhost.
-        'PORT': '', # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'calroc_dendrite'
+##        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+##        'NAME': 'calroc_dendrite',
+##        'USER': 'calroc_dendrite',
+##        'HOST': '', # Set to empty string for localhost.
+##        'PORT': '', # Set to empty string for default.
     }
 }
 
