@@ -65,25 +65,21 @@ $(function() {
 <div id="forward_dialog" class="reveal-modal">
   <h1>Forward to...</h1>
   <div>
-    <p>This is where you select contacts and forward to them.</p>
-    <p>I haven't exactly figured out just how to do this. I'd like
-    to provide a list of contacts with various ways to send them
-    your URLs (i.e. via Twitter, email, SMS, whatever.)</p>
-    <p>For now, here's the first part of the URL with your tag in
-    the {you} position. To use it:</p>
-    <ol>
-    <li>Enter one or more contacts in the form.
-    <li>Click on a contact to add their tag to the end of the URL.
-    <li>Send it to them (via email or Twitter or however.)
-    </ol>
+    <p>Send to anyone:</p>
   </div>
   <div class="taggy_like">
     <a href="http://dendritenetwork.com/bump/{{ you }}/{{ it }}/">
     http://dendritenetwork.com/bump/{{ you }}/{{ it }}/&lt;contact&gt;
     </a>
   </div>
-  <div class="rejform">
+
+  <div>
+    <p>Pick a contact:</p>
     <div id="contacts"></div>
+  </div>
+
+  <div class="rejform">
+    <p>Add a new contact by tag:</p>
     <form class="nice">
       <input
         type="text"
@@ -104,14 +100,8 @@ $(function() {
         <button id="add_new_contact">Add</button>
     </form>
   </div>
-  <div>
-    <p>When your contact browses to the URL they'll see a page like this one and a "bump"
-    will be recorded in the DN logs.</p>
-  </div>
 
-  <div>
-    <button id="forward_no">Close</button>
-  </div>
+  <div><button id="forward_no">Close</button></div>
   <a class="close-reveal-modal">&#215;</a>
 </div>
 
