@@ -117,3 +117,4 @@ function display_contacts() {
     display_contact(target, label, tag);
   })
 }
+

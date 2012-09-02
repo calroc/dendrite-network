@@ -21,6 +21,13 @@ urlpatterns = patterns('',
         name='bump'
         ),
     url(
+        r'^bump'
+        r'/(?P<me>[a-zA-Z0-9]{32})'
+        r'/(?P<it>[a-zA-Z0-9]{32})$',
+        'dendnet.views.bump_anon',
+        name='bump_anon'
+        ),
+    url(
         r'^engage'
         r'/(?P<me>[a-zA-Z0-9]{32})'
         r'/(?P<it>[a-zA-Z0-9]{32})',

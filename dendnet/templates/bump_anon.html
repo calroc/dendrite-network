@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="language" content="en">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Dendrite Network</title>
+    <script type="text/javascript" src="/static/js/json2.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/static/js/underscore.js"></script>
+    <script type="text/javascript" src="/static/foundation-2.2/javascripts/foundation.js"></script>
+    <link href="/static/css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+    <link href="/static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
+    <link href="/static/foundation-2.2/stylesheets/reveal.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script type="text/javascript">
+var engage_url = "/engage/{{ me }}/{{ it }}";
+var bump_url = "http://dendritenetwork.com/bump/{{ me }}/{{ it }}/";
+var iframe_url = "{{ iframe_url }}"
+    </script>
+    <script type="text/javascript" src="/static/js/controls.js"></script>
+    <script type="text/javascript">
+$(function() {
+  setup_button("button#sender", '', (function(){window.location.href = "{{ from_url }}";}));
+  setup_button("button#unneeded", 'ui-icon-plus', (function(){window.location.href = "{{ from_url }}";}));
+  setup_button("button#hurm", 'ui-icon-help', (function(){$('#explain_dialog').reveal();}));
+  setup_button("button#explain_no", 'ui-icon-close', close_explain_dialog);
+  size_iframe();
+  $(window).resize(size_iframe);
+});
+    </script>
+</head>
+<body>
+<div class="container">
+<div class="row"><div class="twelve columns" >&nbsp;</div></div>
+<div class="row"><div class="twelve columns" ><div class="panel">
+  <div id="dn_logo">
+    <button id="sender" title="{{ from_url }}">Someone you know</button>
+    wants to share the website below with you.
+    <div style="float:right">
+      <button id="hurm">Explain</button>
+    </div>
+    <br/>&nbsp;
+  </div>
+</div></div></div>
+
+</div>
+<iframe src="{{ iframe_url }}" ></iframe>
+
+<div id="explain_dialog" class="reveal-modal">
+  <h1 style="font-size:48px">Dendrite Network</h1>
+  <div>
+    <p>You're looking at a page being displayed via the <a href="http://dendritenetwork.com/">Dendrite Network</a>,
+    an experimental information propagation system.</p>
+
+    <p>The person who sent you the URL that brought you here should have explained a little about how it works.
+    There is more information available at the <a href="http://dendritenetwork.com/">main Dendrite Network site</a> and at the
+    <a href="http://firequery.blogspot.com/">blog "Burning Questions"</a>.</p>
+
+    <p>You can also ask questions at the
+    <a href="http://groups.google.com/group/dendrite-network">Dendrite Network Google Group</a></p>
+    
+  </div>
+  <div>
+    <button id="explain_no">Close</button>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+</body>
+</html>
