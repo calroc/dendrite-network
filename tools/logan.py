@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import fileinput
 from collections import defaultdict
 
@@ -7,6 +8,8 @@ class Logan:
     REGISTER = {}
     BUMPS = defaultdict(set)
     ENGAGES = defaultdict(set)
+    ANON_BUMPS = defaultdict(lambda: defaultdict(int))
+    ANON_ENGAGES = defaultdict(lambda: defaultdict(int))
 
     def process(self, line):
         self.what_it_is(*line.split())
@@ -28,10 +31,14 @@ class Logan:
         self.ENGAGES[what].add(who)
 
     def bump_anon(self, day, time, who, what):
-        pass
+        self.ANON_BUMPS[what][who] += 1
+
+    anon = bump_anon
 
     def engage_anon(self, day, time, who, what):
-        pass
+        self.ANON_ENGAGES[what][who] += 1
+
+    anon_engage = engage_anon
 
     def h(self, tag):
         return self.REGISTER.get(tag, tag + "!?")
@@ -54,6 +61,20 @@ class Logan:
                 print ' -->', self.h(who)
             print
 
+    def print_abumps(self):
+        for tag, bumps in self.ANON_BUMPS.items():
+            print self.h(tag)
+            for who in sorted(bumps):
+                print '   ', self.h(who), '--->', bumps[who]
+            print
+
+    def print_aeng(self):
+        for tag, eng in self.ANON_ENGAGES.items():
+            print self.h(tag)
+            for who in sorted(eng):
+                print ' -->', self.h(who), '--->', eng[who]
+            print
+
     def print_report(self):
         print
         print 'Registered URLs'
@@ -67,6 +88,14 @@ class Logan:
         print 'Engages (by subject URL)'
         print
         logan.print_eng()
+        print; print
+        print 'Anonymous Bumps (by subject URL)'
+        print
+        logan.print_abumps()
+        print; print
+        print 'Anonymous Engages (by subject URL)'
+        print
+        logan.print_aeng()
         print
 
 
