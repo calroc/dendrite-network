@@ -16,14 +16,16 @@ urlpatterns = patterns('',
         r'^bump'
         r'/(?P<me>[a-zA-Z0-9]{32})'
         r'/(?P<it>[a-zA-Z0-9]{32})'
-        r'/(?P<you>[a-zA-Z0-9]{32})$',
+        r'/(?P<you>[a-zA-Z0-9]{32})'
+        r'/?$',
         'dendnet.views.bump',
         name='bump'
         ),
     url(
         r'^bump'
         r'/(?P<me>[a-zA-Z0-9]{32})'
-        r'/(?P<it>[a-zA-Z0-9]{32})$',
+        r'/(?P<it>[a-zA-Z0-9]{32})'
+        r'/?$',
         'dendnet.views.bump_anon',
         name='bump_anon'
         ),
@@ -31,7 +33,8 @@ urlpatterns = patterns('',
         r'^engage'
         r'/(?P<me>[a-zA-Z0-9]{32})'
         r'/(?P<it>[a-zA-Z0-9]{32})'
-        r'(?P<anon>/_anon)?',
+        r'(?P<anon>/_anon)?'
+        r'/?$',
         'dendnet.views.engage',
         name='engage'
         ),
