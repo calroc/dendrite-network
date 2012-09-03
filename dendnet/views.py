@@ -63,7 +63,7 @@ def bump_anon(request, me, it):
         me=me,
         it=it,
         )
-    log.info('anon %s %s', me, it)
+    log.info('bump_anon %s %s', me, it)
     return render_to_response(
         'bump_anon.html',
         data,
@@ -71,6 +71,9 @@ def bump_anon(request, me, it):
         )
 
 
-def engage(request, me, it):
-    log.info('engage %s %s', me, it)
+def engage(request, me, it, anon=None):
+    if anon is None:
+        log.info('engage %s %s', me, it)
+    else:
+        log.info('engage_anon %s %s', me, it)
     return HttpResponse('true', mimetype="application/json")

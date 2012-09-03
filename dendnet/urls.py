@@ -30,7 +30,8 @@ urlpatterns = patterns('',
     url(
         r'^engage'
         r'/(?P<me>[a-zA-Z0-9]{32})'
-        r'/(?P<it>[a-zA-Z0-9]{32})',
+        r'/(?P<it>[a-zA-Z0-9]{32})'
+        r'(?P<anon>/_anon)?',
         'dendnet.views.engage',
         name='engage'
         ),

@@ -15,7 +15,7 @@
     <link href="/static/foundation-2.2/stylesheets/reveal.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
     <script type="text/javascript">
-var engage_url = "/engage/{{ me }}/{{ it }}";
+var engage_url = "/engage/{{ me }}/{{ it }}/_anon";
 var bump_url = "http://dendritenetwork.com/bump/{{ me }}/{{ it }}/";
 var iframe_url = "{{ iframe_url }}"
     </script>
@@ -23,6 +23,7 @@ var iframe_url = "{{ iframe_url }}"
     <script type="text/javascript">
 $(function() {
   setup_button("button#sender", '', (function(){window.location.href = "{{ from_url }}";}));
+  setup_button("button#website", '', engage_action);
   setup_button("button#unneeded", 'ui-icon-plus', (function(){window.location.href = "{{ from_url }}";}));
   setup_button("button#hurm", 'ui-icon-help', (function(){$('#explain_dialog').reveal();}));
   setup_button("button#explain_no", 'ui-icon-close', close_explain_dialog);
@@ -36,8 +37,10 @@ $(function() {
 <div class="row"><div class="twelve columns" >&nbsp;</div></div>
 <div class="row"><div class="twelve columns" ><div class="panel">
   <div id="dn_logo">
-    <button id="sender" title="{{ from_url }}">Someone you know</button>
-    wants to share the website below with you.
+    <button id="sender" title="Sender: {{ from_url }}">Someone you know</button>
+    wants to share the
+    <button id="website" title="Click to remove header and visit {{ iframe_url }}">website</button>
+    below with you.
     <div style="float:right">
       <button id="hurm">Explain</button>
     </div>

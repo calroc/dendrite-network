@@ -27,6 +27,12 @@ class Logan:
 ##        print 'engage  \t', who, what
         self.ENGAGES[what].add(who)
 
+    def bump_anon(self, day, time, who, what):
+        pass
+
+    def engage_anon(self, day, time, who, what):
+        pass
+
     def h(self, tag):
         return self.REGISTER.get(tag, tag + "!?")
 
