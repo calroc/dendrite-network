@@ -47,6 +47,14 @@ function note_own_tag(tag) {
   })
 }
 
+function get_own_tag() {
+  var tag = $.cookie("own_tag");
+  if (_.isNull(tag)) {
+    return '';
+  }
+  return tag;
+}
+
 function get_contacts() {
   var contacts_cookie = $.cookie("contacts");
   if (_.isNull(contacts_cookie)) {
@@ -118,3 +126,12 @@ function display_contacts() {
   })
 }
 
+function nonanon(base_url) {
+  var own_tag = get_own_tag();
+  if (own_tag != '') {
+    var bump_url = base_url + own_tag
+    window.location.href = bump_url;
+    return true; // Dunno if this is needed.
+  }
+  return false;
+}

@@ -4,9 +4,6 @@ from dendnet.memcache import Client
 from tagly import tag_for as gen_tag
 
 
-##gen_tag = lambda url: md5(url).hexdigest()
-
-
 if exists('/home/calroc/memcached.sock'):
     U2T = T2U = Client(['unix:/home/calroc/memcached.sock'], debug=True)
 else:
