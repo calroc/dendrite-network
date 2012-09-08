@@ -38,6 +38,7 @@ $(function() {
   display_contacts();
   $(window).resize(size_iframe);
   $(".taggy_like").find("a").click(function() { return false; });
+  $('#accordion').accordion();
 });
     </script>
 </head>
@@ -63,21 +64,31 @@ $(function() {
 <iframe src="{{ iframe_url }}" ></iframe>
 
 <div id="forward_dialog" class="reveal-modal">
-  <h1>Forward to...</h1>
+  <h1>Forward...</h1>
+  
+<div id="accordion">
+  <h3><a href="#">Send this link to anyone <span style="font-size:smaller">(right-click and select "copy link location")</span></a></h3>
+  <div>
   <div class="taggy_like">
-    <p>Send this link to anyone <span style="font-size:smaller">(right-click and select "copy link location")</span>:</p>
     <a href="http://dendritenetwork.com/bump/{{ you }}/{{ it }}/">
     http://dendritenetwork.com/bump/{{ you }}/{{ it }}/
     </a>
   </div>
-
-  <div>
-    <p>Pick a contact:</p>
-    <div id="contacts"></div>
   </div>
 
+  <h3><a href="#">Pick a contact</a></h3>
+  <div>
+    <div id="contacts"></div>
+    <div id="updatable_url" class="taggy_like">
+      <span></span>
+      <a href="#"><br>Click on a contact to generate bump URL<br><br></a>
+    </div>
+  </div>
+
+
+  <h3><a href="#">Add a new contact by tag</a></h3>
+  <div>
   <div class="rejform">
-    <p>Add a new contact by tag:</p>
     <form class="nice">
       <input
         type="text"
@@ -98,6 +109,8 @@ $(function() {
         <button id="add_new_contact">Add</button>
     </form>
   </div>
+  </div>
+</div>
 
   <div><button id="forward_no">Close</button></div>
   <a class="close-reveal-modal">&#215;</a>

@@ -104,11 +104,13 @@ function add_new_contact() {
 }
 
 function display_contact(target, label, tag) {
-  var d = $('<div class="contact_display"><a href="#">append tag of <span></span></a></div>');
+  var d = $('<div class="contact_display"><a href="#">@<span></span></a></div>');
   d.find("span").text(label);
   d.find("a").click(function() {
     var burl = bump_url + tag;
-    var taggy = $("div.taggy_like").find("a");
+    var duu = $("div#updatable_url");
+    duu.find("span").text('@' + label + ' please check out');
+    var taggy = duu.find("a");
     taggy.text(burl);
     taggy.attr("href", burl);
     console.log(burl);
