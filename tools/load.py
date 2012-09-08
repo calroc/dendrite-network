@@ -7,4 +7,5 @@ from dendnet.stores import url2tag
 logging.basicConfig()
 log = logging.getLogger('load')
 for line in fileinput.input():
-    url2tag(line.strip(), log)
+    line = line.strip()
+    print url2tag(line, log), line

@@ -14,25 +14,25 @@ urlpatterns = patterns('',
     url(r'^xreg/?$', 'dendnet.views.register_ajax', name='register_ajax'),
     url(
         r'^bump'
-        r'/(?P<me>[a-zA-Z0-9]{32})'
-        r'/(?P<it>[a-zA-Z0-9]{32})'
-        r'/(?P<you>[a-zA-Z0-9]{32})'
+        r'/(?P<me>[a-zA-Z0-9]{24,25})'
+        r'/(?P<it>[a-zA-Z0-9]{24,25})'
+        r'/(?P<you>[a-zA-Z0-9]{24,25})'
         r'/?$',
         'dendnet.views.bump',
         name='bump'
         ),
     url(
         r'^bump'
-        r'/(?P<me>[a-zA-Z0-9]{32})'
-        r'/(?P<it>[a-zA-Z0-9]{32})'
+        r'/(?P<me>[a-zA-Z0-9]{24,25})'
+        r'/(?P<it>[a-zA-Z0-9]{24,25})'
         r'/?$',
         'dendnet.views.bump_anon',
         name='bump_anon'
         ),
     url(
         r'^engage'
-        r'/(?P<me>[a-zA-Z0-9]{32})'
-        r'/(?P<it>[a-zA-Z0-9]{32})'
+        r'/(?P<me>[a-zA-Z0-9]{24,25})'
+        r'/(?P<it>[a-zA-Z0-9]{24,25})'
         r'(?P<anon>/_anon)?'
         r'/?$',
         'dendnet.views.engage',

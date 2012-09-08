@@ -1,9 +1,10 @@
 from os.path import exists
 from hashlib import md5
 from dendnet.memcache import Client
+from tagly import tag_for as gen_tag
 
 
-gen_tag = lambda url: md5(url).hexdigest()
+##gen_tag = lambda url: md5(url).hexdigest()
 
 
 if exists('/home/calroc/memcached.sock'):
