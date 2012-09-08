@@ -10,25 +10,18 @@
     <link href="static/foundation-2.2/stylesheets/foundation.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
 	<title>Dendrite Network</title>
+    <script type="text/javascript" src="/static/js/controls.js"></script>
     <script type="text/javascript">
 $(function() {
-    $("input:submit").button().click(function() {
-      var urly = $("#urly").val();
-      if (urly == "") {
-        return false;
-      }
-      $.post(
+    $("input:submit").button().click(make_register_callback(
         "{% url register_ajax %}",
-        {'urly': urly},
+        "#urly", 
         function (tag) { 
           $("div.taggy").text(tag);
           $("div#urly_display").text(urly);
           $("#urly").val("");
           $("div#tag_display").fadeIn();
-        }
-      );
-      return false;
-    });
+        }));
 });
     </script>
 </head>

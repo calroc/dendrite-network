@@ -137,3 +137,14 @@ function nonanon(base_url) {
   }
   return false;
 }
+
+function make_register_callback(reg_url, url_selector, tag_callback) {
+  return function() {
+    var urly = $(url_selector).val();
+    if (urly != "") {
+      $.post(reg_url, {'urly': urly}, tag_callback);
+    }
+    return false;
+  }
+}
+

@@ -28,6 +28,15 @@ $(function() {
     setup_button("button#unneeded", 'ui-icon-plus', (function(){window.location.href = "{{ from_url }}";}));
     setup_button("button#hurm", 'ui-icon-help', (function(){$('#explain_dialog').reveal();}));
     setup_button("button#explain_no", 'ui-icon-close', close_explain_dialog);
+    setup_button("input:submit", 'ui-icon-plus', make_register_callback(
+        "{% url register_ajax %}",
+        "#urly",
+        function (tag) {
+          if (tag != '') {
+            note_own_tag(tag);
+            nonanon(bump_url);
+          }
+        }));
     size_iframe();
     $(window).resize(size_iframe);
   }
@@ -56,16 +65,25 @@ $(function() {
 <div id="explain_dialog" class="reveal-modal">
   <h1 style="font-size:48px">Dendrite Network</h1>
   <div>
-    <p>You're looking at a page being displayed via the <a href="http://dendritenetwork.com/">Dendrite Network</a>,
-    an experimental information propagation system.</p>
+    <p>You're looking at a page being displayed through the <a href="http://dendritenetwork.com/">Dendrite Network</a></p>
 
-    <p>The person who sent you the URL that brought you here should have explained a little about how it works.
-    There is more information available at the <a href="http://dendritenetwork.com/">main Dendrite Network site</a> and at the
-    <a href="http://firequery.blogspot.com/">blog "Burning Questions"</a>.</p>
-
-    <p>You can also ask questions at the
+    <p>The person who sent you here should have explained how it works and you can find out more
+    at the <a href="http://firequery.blogspot.com/">blog "Burning Questions"</a> and the
     <a href="http://groups.google.com/group/dendrite-network">Dendrite Network Google Group</a></p>
-    
+
+<div id="slider" class="panel">
+    If you already know you want to participate then pick an URL to represent yourself and register it to get a tag:
+    <form class="nice" method="POST" action="{% url register %}">
+        {% csrf_token %}
+        <center>
+        <input id="urly" type="text" name="urly" maxlength="100" size="50" placeholder="http://" />
+        </center>
+        <br/>
+        <input type="submit" value="Tag this URL and use it to represent me"/>
+    </form>
+</div>
+
+
   </div>
   <div>
     <button id="explain_no">Close</button>
